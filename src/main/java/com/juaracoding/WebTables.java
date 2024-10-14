@@ -15,7 +15,7 @@ public class WebTables {
         driver.get("https://demoqa.com/webtables");
 
         //scroll 200px
-        js.executeScript("window.scrollBy(0,250)");
+        js.executeScript("window.scrollBy(0,500)");
 
         //locator button add
         driver.findElement(By.id("addNewRecordButton")).click();
@@ -43,7 +43,8 @@ public class WebTables {
         //menghapus data yang telah ditambahkan
         driver.findElement(By.cssSelector("#delete-record-4 > svg")).click();
 
-
+        //mengembalikan tabel seperti awal
+        driver.findElement(By.id("searchBox")).clear();
 
 
         //delay 5detik
