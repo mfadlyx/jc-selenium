@@ -5,16 +5,32 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.concurrent.TimeUnit;
+
 public class WebTables {
 
     public static void main(String[] args) {
         System.setProperty("webdriver.chrome.driver", "C:\\MyTools\\chromedriver-win64\\chromedriver.exe");
         WebDriver driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         JavascriptExecutor js = (JavascriptExecutor) driver;
         driver.manage().window().maximize();
         driver.get("https://demoqa.com/webtables");
 
-        //scroll 200px
+        //web scrapping
+        String txtTittle = driver.findElement(By.cssSelector
+                ("#app > div > div > div > div.col-12.mt-4.col-md-6 > h1")).getText();
+        System.out.println(txtTittle);
+
+        //get tag tittle
+        String tagTittle = driver.getTitle();
+        System.out.println(tagTittle);
+
+        //get current url
+        String currentUrl = driver.getCurrentUrl();
+        System.out.println(currentUrl);
+
+        //scroll 500px
         js.executeScript("window.scrollBy(0,500)");
 
         //locator button add
@@ -47,12 +63,9 @@ public class WebTables {
         driver.findElement(By.id("searchBox")).clear();
 
 
-        //delay 5detik
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        //delay 5 detik
+        Utils.delay(5);
         driver.quit();
+        System.out.println("Quit Browser");
     }
 }
